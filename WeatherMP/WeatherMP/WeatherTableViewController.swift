@@ -74,7 +74,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         let weatherObject = forecastData[indexPath.row]
         
         cell.textLabel?.text = weatherObject.summary
-        
+        cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °C"
 
         return cell
     }

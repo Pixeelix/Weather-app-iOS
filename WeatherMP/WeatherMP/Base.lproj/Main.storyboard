@@ -47,7 +47,7 @@
             </objects>
             <point key="canvasLocation" x="622" y="446"/>
         </scene>
-        <!--City Weather-->
+        <!--Kae perra, mis ilm liinan om -->
         <scene sceneID="JEp-Ym-A6y">
             <objects>
                 <tableViewController id="fxA-lH-ecn" customClass="WeatherTableViewController" customModule="WeatherMP" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,22 +61,22 @@
                             <textInputTraits key="textInputTraits" textContentType="location"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="jvb-5F-yd6" detailTextLabel="Oa1-cl-nQC" rowHeight="79" style="IBUITableViewCellStyleSubtitle" id="mXP-X0-hKR">
-                                <rect key="frame" x="0.0" y="72" width="414" height="79"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="jvb-5F-yd6" detailTextLabel="Oa1-cl-nQC" rowHeight="100" style="IBUITableViewCellStyleSubtitle" id="mXP-X0-hKR">
+                                <rect key="frame" x="0.0" y="72" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mXP-X0-hKR" id="WFp-J9-FbW">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="78.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jvb-5F-yd6">
-                                            <rect key="frame" x="20.000000000000004" y="20" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="20.000000000000004" y="30" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oa1-cl-nQC">
-                                            <rect key="frame" x="19.999999999999996" y="43.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
+                                            <rect key="frame" x="19.999999999999996" y="53.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -92,7 +92,7 @@
                             <outlet property="delegate" destination="fxA-lH-ecn" id="hpU-GP-L96"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="City Weather" id="ubA-ox-wGs"/>
+                    <navigationItem key="navigationItem" title="Kae perra, mis ilm liinan om " id="ubA-ox-wGs"/>
                     <connections>
                         <outlet property="searchBar" destination="Jav-iw-rMq" id="y8C-lQ-eNr"/>
                     </connections>
