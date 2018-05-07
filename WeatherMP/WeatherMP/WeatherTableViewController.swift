@@ -2,7 +2,6 @@
 //  WeatherTableViewController.swift
 //  WeatherMP
 //
-//  Created by Greete Jõgi on 07/05/2018.
 //  Copyright © 2018 Martin Pihooja. All rights reserved.
 //
 
@@ -75,6 +74,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
         cell.textLabel?.text = weatherObject.summary
         cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °C"
+        cell.imageView?.image = UIImage (named: weatherObject.icon)
 
         return cell
     }

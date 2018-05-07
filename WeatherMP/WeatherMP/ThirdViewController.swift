@@ -2,7 +2,6 @@
 //  ThirdViewController.swift
 //  WeatherMP
 //
-//  Created by Greete Jõgi on 07/05/2018.
 //  Copyright © 2018 Martin Pihooja. All rights reserved.
 //
 
