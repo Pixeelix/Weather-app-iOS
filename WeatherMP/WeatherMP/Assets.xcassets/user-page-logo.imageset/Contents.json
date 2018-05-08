@@ -6,11 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "wind.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "user-page-logo.png",
       "scale" : "3x"
     }
   ],
