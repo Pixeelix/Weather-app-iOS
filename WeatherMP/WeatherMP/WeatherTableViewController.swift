@@ -8,16 +8,33 @@
 import UIKit
 import CoreLocation
 
-class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
+class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
     var forecastData = [Weather]()
+    let locationManager = CLLocationManager()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchBar.delegate = self
+        
+        UpdateWeatherForLocation(location: "Tallinn")
 
-       searchBar.delegate = self
+        
+        //Ask Location
+        /*
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        */
+        
+       
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
@@ -27,6 +44,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
             UpdateWeatherForLocation(location: locationString)
         }
     }
+    
+    //Hide keyboard if user starts to scroll down
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+    
+
     
     func UpdateWeatherForLocation (location:String){
         CLGeocoder().geocodeAddressString(location){
@@ -58,19 +82,27 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return forecastData.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return forecastData.count
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        
+        return dateFormatter.string(from: date!)
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let weatherObject = forecastData[indexPath.row]
+        let weatherObject = forecastData[indexPath.section]
         
         cell.textLabel?.text = weatherObject.summary
         cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °C"

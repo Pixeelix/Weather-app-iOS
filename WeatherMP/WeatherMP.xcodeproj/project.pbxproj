@@ -15,6 +15,7 @@
 		3A5FF58C20A0CE7E005B4ABC /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FF58B20A0CE7E005B4ABC /* ThirdViewController.swift */; };
 		3A5FF58E20A0D7EF005B4ABC /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FF58D20A0D7EF005B4ABC /* WeatherTableViewController.swift */; };
 		3A5FF59020A0DA29005B4ABC /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FF58F20A0DA29005B4ABC /* Weather.swift */; };
+		3A5FF59320A0FE8F005B4ABC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5FF59220A0FE8F005B4ABC /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3A5FF58B20A0CE7E005B4ABC /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		3A5FF58D20A0D7EF005B4ABC /* WeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewController.swift; sourceTree = "<group>"; };
 		3A5FF58F20A0DA29005B4ABC /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Weather.swift; path = "../../../../WeatherApp-master 2/SwiftWeather/Weather.swift"; sourceTree = "<group>"; };
+		3A5FF59220A0FE8F005B4ABC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5FF59320A0FE8F005B4ABC /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,7 @@
 			children = (
 				3A5FF57620A0C5B8005B4ABC /* WeatherMP */,
 				3A5FF57520A0C5B8005B4ABC /* Products */,
+				3A5FF59120A0FE8F005B4ABC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +75,14 @@
 				3A5FF58520A0C5BB005B4ABC /* Info.plist */,
 			);
 			path = WeatherMP;
+			sourceTree = "<group>";
+		};
+		3A5FF59120A0FE8F005B4ABC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A5FF59220A0FE8F005B4ABC /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
