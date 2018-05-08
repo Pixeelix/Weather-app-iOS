@@ -18,27 +18,65 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNotifications()
+        setupNotifications() // Set up Local notifications
         
         searchBar.delegate = self
-        // If app starts, get Tallinn weather forecast and show it to user
-        // !Need to be changed to current user location instead of Tallinn
-        UpdateWeatherForLocation(location: "Tallinn")
-
         
-        // Ask Location
-        /*
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        */
-        
-       
+        startReceivingLocationChanges()
         
     }
     
-    func setupNotifications (){
+    func startReceivingLocationChanges() {
+        // Check if user has allowed authorized access to location or not
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        if authorizationStatus != .authorizedWhenInUse && authorizationStatus != .authorizedAlways {
+        // User has not authorized access to location information, request authorization now
+           locationManager.requestWhenInUseAuthorization()
+        }
+        // Do not start services that aren't available.
+        if !CLLocationManager.locationServicesEnabled() {
+            // Location services is not available.
+            return
+        }
+        // Configure and start the service.
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer // Set accuracy to 1km to save power and time
+        locationManager.distanceFilter = 5000.0  // In meters. User needs to move 5km before location updated
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Use the last reported location.
+        if let lastLocation = self.locationManager.location {
+            let geocoder = CLGeocoder()
+            
+            // Look up the location and pass it to the completion handler
+            geocoder.reverseGeocodeLocation(lastLocation,
+                                            completionHandler: { (placemarks, error) in
+                                                if error == nil {
+                                                    let firstLocation = placemarks?[0]
+                                                    let currentLocationName = firstLocation?.locality // Get the current location name
+                                                    self.searchBar.placeholder = currentLocationName  // Place the current location name to searchbar
+                                                    self.UpdateWeatherForLocation(location: currentLocationName!) // Get current location weather data
+                                                }
+                                                else {
+                                                    // An error occurred during geocoding.
+                                                    print("Something went wrong")
+                                                }
+            })
+        }
+        else {
+            print("No location")
+            // No location was available.
+        }
+    }
+    
+    
+    // Set up Local Notifications
+    func setupNotifications ()
+    {
         let notificatioCenter = UNUserNotificationCenter.current()
         
         // If notifications are authorized - set up the notification, else - request authorization from user
@@ -69,9 +107,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
                 // Ask permission to send notificatications with sound, alert and badge
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
             }
-        }
-        
-        
+          }
         }
     
     // If serch bar button clicked, take inserted text as location
@@ -83,20 +119,19 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         }
     }
     
-    //Hide keyboard if user starts to scroll down
+    // Hide keyboard if user starts to scroll down
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.endEditing(true)
     }
     
-
-    
+    // Convert the location String to coordinates
     func UpdateWeatherForLocation (location:String){
         CLGeocoder().geocodeAddressString(location){
             (placemarks:[CLPlacemark]?, error:Error?) in
-            if error == nil {
-                if let location = placemarks?.first?.location {
-                    Weather.forecast(withLocation: location.coordinate, completion: {(results:[Weather]?)
-                        in
+            if error == nil{
+                if let location = placemarks?.first?.location
+                {
+                    Weather.forecast(withLocation: location.coordinate, completion: {(results:[Weather]?)in
                         
                         if let weatherData = results {
                             self.forecastData = weatherData
@@ -144,9 +179,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
 
         let weatherObject = forecastData[indexPath.section]
         
-        cell.textLabel?.text = weatherObject.summary
-        cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °C"
-        cell.imageView?.image = UIImage (named: weatherObject.icon)
+        cell.textLabel?.text = weatherObject.summary // Show weather summary text
+        cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °C" // Show temperature
+        cell.imageView?.image = UIImage (named: weatherObject.icon) // Show icon based on weather data
 
         return cell
     }
