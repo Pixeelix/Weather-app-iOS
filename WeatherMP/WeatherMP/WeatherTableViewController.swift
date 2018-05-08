@@ -7,25 +7,26 @@
 
 import UIKit
 import CoreLocation
+import UserNotifications
 
 class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
-    
     var forecastData = [Weather]()
     let locationManager = CLLocationManager()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.delegate = self
+        setupNotifications()
         
+        searchBar.delegate = self
+        // If app starts, get Tallinn weather forecast and show it to user
+        // !Need to be changed to current user location instead of Tallinn
         UpdateWeatherForLocation(location: "Tallinn")
 
         
-        //Ask Location
+        // Ask Location
         /*
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -37,6 +38,43 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         
     }
     
+    func setupNotifications (){
+        let notificatioCenter = UNUserNotificationCenter.current()
+        
+        // If notifications are authorized - set up the notification, else - request authorization from user
+        notificatioCenter.getNotificationSettings { (settings) in
+            
+            if(settings.authorizationStatus == .authorized)
+            {
+                // Configure the notification
+                let notificationContent = UNMutableNotificationContent()
+                notificationContent.title = "Ilmajaama teavitus !"
+                notificationContent.subtitle = "Kas Sina tead, mis ilma täna tuleb ?"
+                notificationContent.body = "Mina juba tean, tule ja vaata ka sina"
+                notificationContent.badge = 1 // Show app icon in the notification
+                
+                // Configure the notification recurring date
+                var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                dateComponents.hour = 12     // 12:00 hours
+                
+                // Set the notification triggger so, that notifications are sent every day 12.00
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                let request = UNNotificationRequest(identifier: "timerDone", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+                
+            else
+            {
+                // Ask permission to send notificatications with sound, alert and badge
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
+            }
+        }
+        
+        
+        }
+    
+    // If serch bar button clicked, take inserted text as location
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         searchBar.resignFirstResponder()
@@ -90,15 +128,17 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         return 1
     }
     
+    // Add date to table view Section header
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateFormatter.locale = Locale(identifier: "et_EE") // Change date language to estonian
+        dateFormatter.dateFormat = "dd MMMM yyyy" // Change date format
         
         return dateFormatter.string(from: date!)
     }
 
-    
+    // Add weather information to the table view Cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
