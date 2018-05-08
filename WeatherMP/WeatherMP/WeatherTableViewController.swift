@@ -22,7 +22,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         
         searchBar.delegate = self
         
-        //startReceivingLocationChanges()
+        startReceivingLocationChanges()
         
     }
     

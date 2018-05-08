@@ -12,10 +12,26 @@ class RegisterAccountViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     @IBOutlet weak var repeatPasswordTextField: UITextField!
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var changeProfileImageButton: UIButton!
+    
+    var imagePicker:UIImagePickerController!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(openImagePicker))
+        userProfileImage.isUserInteractionEnabled = true
+        userProfileImage.addGestureRecognizer(imageTap)
+        userProfileImage.layer.cornerRadius = userProfileImage.bounds.height / 2
+        userProfileImage.clipsToBounds = true
+        changeProfileImageButton.addTarget(self, action: #selector (openImagePicker), for: .touchUpInside)
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
     }
     
     //If register button pressed
@@ -71,18 +87,33 @@ class RegisterAccountViewController: UIViewController {
         self.present(myAlert, animated:true, completion:nil);
     }
     
-    // I alredy have an account button goes back to sign in page
-    @IBAction func userAlreadyHaveAccountBtnPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil);
+    // Open image picker if User taps the image area
+    @objc func openImagePicker(_ sender:Any) {
+        // Open Image Picker
+        self.present(imagePicker, animated: true, completion: nil)
     }
+    
+    
     
     // Hide keyboard if user clicks outside of textbox 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 
-    
-    
+}
 
-
+extension RegisterAccountViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.userProfileImage.image = pickedImage
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
