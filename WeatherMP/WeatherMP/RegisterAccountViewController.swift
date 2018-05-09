@@ -56,34 +56,35 @@ class RegisterAccountViewController: UIViewController {
             return;
         }
         
+        // Encoding image
+        let userProfileImageToStore = userProfileImage.image
+        let profileImageData:NSData = UIImagePNGRepresentation(userProfileImageToStore!)! as NSData
+        
         // Store data
         UserDefaults.standard.set(userName, forKey: "userName");
         UserDefaults.standard.set(userPassword, forKey: "userPassword");
+        UserDefaults.standard.set(profileImageData, forKey: "userProfileImage");
         UserDefaults.standard.synchronize();
         
         // Display confirmation message
-        
         let myAlert = UIAlertController(title: "Palju Õnne", message: "Kasutaja loomine õnnestus", preferredStyle: UIAlertControllerStyle.alert);
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default){ action in
            
-            self.dismiss(animated: true, completion: nil);
+            // Go back to prevoius page
+            self.navigationController?.popViewController(animated: true)
         }
         
         myAlert.addAction(okAction);
         self.present(myAlert, animated:true, completion:nil);
-            
         
     }
     // Configure Arlert message box
     func displayMyAlertMessage(userMessage:String){
         
         let myAlert = UIAlertController(title: "Viga kasutaja loomisel !", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
-        
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil);
-        
         myAlert.addAction(okAction);
-        
         self.present(myAlert, animated:true, completion:nil);
     }
     
@@ -93,15 +94,13 @@ class RegisterAccountViewController: UIViewController {
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    
-    
     // Hide keyboard if user clicks outside of textbox 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 
 }
-
+// Image Picker controller
 extension RegisterAccountViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -110,6 +109,7 @@ extension RegisterAccountViewController: UIImagePickerControllerDelegate, UINavi
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
+        // Set the picked image to profile picture
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             self.userProfileImage.image = pickedImage
         }

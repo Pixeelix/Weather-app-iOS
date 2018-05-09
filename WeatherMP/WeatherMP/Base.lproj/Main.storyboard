@@ -71,21 +71,24 @@
                                     <segue destination="af0-G7-rsT" kind="show" identifier="looUusKasutaja" id="l8a-cW-YCr"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BLZ-o2-ypC">
+                                <rect key="frame" x="128" y="461" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qrd-lo-aNy"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Logi sisse" id="1gm-di-sL5">
-                        <barButtonItem key="backBarButtonItem" title="Tagasi" id="FM8-Zl-dpX"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Logi sisse" id="1gm-di-sL5"/>
                     <connections>
+                        <outlet property="TestImageOutput" destination="BLZ-o2-ypC" id="eOA-le-92n"/>
                         <outlet property="userNameTextField" destination="tvd-QJ-x4a" id="Okp-Up-lTJ"/>
                         <outlet property="userPasswordTextField" destination="Vu1-b0-aRF" id="lYE-Sx-l9K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t6r-Qp-4uE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1401" y="445"/>
+            <point key="canvasLocation" x="2134" y="445"/>
         </scene>
         <!--Loo uus kasutaja-->
         <scene sceneID="Xrc-cz-DPG">
@@ -169,7 +172,9 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="XUe-Pl-LgK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Loo uus kasutaja" id="mfG-FT-vtW"/>
+                    <navigationItem key="navigationItem" title="Loo uus kasutaja" id="mfG-FT-vtW">
+                        <barButtonItem key="backBarButtonItem" title="Tagasi" id="hFY-Bp-eeh"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="changeProfileImageButton" destination="YgZ-Oc-plg" id="G3u-r4-Bag"/>
                         <outlet property="repeatPasswordTextField" destination="eTn-77-VYl" id="hVf-Z6-yLI"/>
@@ -180,7 +185,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VvQ-7j-9V0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2154" y="445"/>
+            <point key="canvasLocation" x="2870" y="445"/>
+        </scene>
+        <!--User Profile View Controller-->
+        <scene sceneID="00j-MK-9Yq">
+            <objects>
+                <viewController id="MaY-aV-65w" customClass="UserProfileViewController" customModule="WeatherMP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q3c-IY-9m5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Hi9-Mm-xKt"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="w6m-5T-ANk">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="DWh-nI-Epz">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D1e-wO-ot4">
+                                <rect key="frame" x="276" y="5.5" width="83" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Logi välja"/>
+                                <connections>
+                                    <action selector="logOutButtonPressed:" destination="MaY-aV-65w" eventType="touchUpInside" id="u1k-E9-GGu"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="3gH-z8-Ue0" kind="show" identifier="loginView" id="qex-3N-r9A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GYg-iA-p1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1401" y="445"/>
         </scene>
         <!--Kae perra, mis ilm liinan om -->
         <scene sceneID="JEp-Ym-A6y">
@@ -334,7 +370,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="3gH-z8-Ue0" kind="relationship" relationship="rootViewController" id="kbl-jp-z5V"/>
+                        <segue destination="MaY-aV-65w" kind="relationship" relationship="rootViewController" id="IAz-pV-ofO"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GnV-zc-b7J" userLabel="First Responder" sceneMemberID="firstResponder"/>

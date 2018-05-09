@@ -13,9 +13,15 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     
+    @IBOutlet weak var TestImageOutput: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.navigationItem.setHidesBackButton(true, animated:true);
+        
+        let data = UserDefaults.standard.object(forKey: "userProfileImage") as! NSData
+        TestImageOutput.image = UIImage(data: data as Data)
         // Do any additional setup after loading the view.
     }
     
@@ -33,8 +39,28 @@ class LogInViewController: UIViewController {
         {
             if(userPasswordStored == userPassword)
             {
-                // Login was successfull
+                // Login was successfull - set the flag and hide login page
+                UserDefaults.standard.set(true, forKey: "isUserLoggedIn");
+                UserDefaults.standard.synchronize();
+                
+                 self.navigationController?.popViewController(animated: true)
             }
+            // Wrong Password Alert
+            else
+            {
+                let myAlert = UIAlertController(title: "Viga parooli sisestamisel !", message: "Palu proovi uuesti", preferredStyle: UIAlertControllerStyle.alert);
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil);
+                myAlert.addAction(okAction);
+                self.present(myAlert, animated:true, completion:nil);
+            }
+        }
+        // Wrong User Name Alert
+        else
+        {
+            let myAlert = UIAlertController(title: "Viga kasutaja sisestamisel !", message: "Palu proovi uuesti", preferredStyle: UIAlertControllerStyle.alert);
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil);
+            myAlert.addAction(okAction);
+            self.present(myAlert, animated:true, completion:nil);
         }
     }
     
