@@ -22,7 +22,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         
         searchBar.delegate = self
         
-        //startReceivingLocationChanges()
+        startReceivingLocationChanges()
         
     }
     
@@ -43,8 +43,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         locationManager.distanceFilter = 5000.0  // In meters. User needs to move 5km before location updated
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
-        
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -52,24 +50,29 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         if let lastLocation = self.locationManager.location {
             let geocoder = CLGeocoder()
             
-            // Look up the location and pass it to the completion handler
-            geocoder.reverseGeocodeLocation(lastLocation,
-                                            completionHandler: { (placemarks, error) in
-                                                if error == nil {
-                                                    let firstLocation = placemarks?[0]
-                                                    let currentLocationName = firstLocation?.locality // Get the current location name
-                                                    self.searchBar.placeholder = currentLocationName  // Place the current location name to searchbar
-                                                    self.UpdateWeatherForLocation(location: currentLocationName!) // Get current location weather data
-                                                }
-                                                else {
-                                                    // An error occurred during geocoding.
-                                                    print("Something went wrong")
-                                                }
+            // Lookup the location and pass it to the completion handler
+            geocoder.reverseGeocodeLocation(lastLocation, completionHandler:{(placemarks, error) in
+                if error == nil
+                {
+                    let firstLocation = placemarks?[0]
+                    // Get the current location name
+                    let currentLocationName = firstLocation?.locality
+                    // Place the current location name to the searchbar
+                    self.searchBar.placeholder = currentLocationName
+                    // Get current location weather data
+                    self.UpdateWeatherForLocation(location: currentLocationName!)
+                }
+                else
+                {
+                 // An error occurred during geocoding.
+                    print("Something went wrong")
+                }
             })
         }
-        else {
-            print("No location")
+        else
+        {
             // No location was available.
+            print("No location")
         }
     }
     
@@ -110,7 +113,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
           }
         }
     
-    // If serch bar button clicked, take inserted text as location
+    // If serchbar button clicked, take inserted text as location
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         searchBar.resignFirstResponder()
@@ -125,14 +128,12 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
     }
     
     // Convert the location String to coordinates
-    func UpdateWeatherForLocation (location:String){
-        CLGeocoder().geocodeAddressString(location){
+    func UpdateWeatherForLocation (location:String){CLGeocoder().geocodeAddressString(location){
             (placemarks:[CLPlacemark]?, error:Error?) in
             if error == nil{
                 if let location = placemarks?.first?.location
                 {
                     Weather.forecast(withLocation: location.coordinate, completion: {(results:[Weather]?)in
-                        
                         if let weatherData = results {
                             self.forecastData = weatherData
                             
@@ -146,13 +147,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return forecastData.count
