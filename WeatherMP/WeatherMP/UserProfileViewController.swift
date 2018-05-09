@@ -10,21 +10,27 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
 
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var userNameOutLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn");
+        // Hide back button
+        self.navigationItem.setHidesBackButton(true, animated:true);
         
-        if(!isUserLoggedIn)
-        {
-            self.performSegue(withIdentifier: "loginView", sender: self)
-        }
+        // Show user profile image
+        userProfileImage.isUserInteractionEnabled = true
+        userProfileImage.layer.cornerRadius = userProfileImage.bounds.height / 2
+        userProfileImage.clipsToBounds = true
+        
+        let data = UserDefaults.standard.object(forKey: "userProfileImage") as! NSData
+        userProfileImage.image = UIImage(data: data as Data)
+        // Show username
+        userNameOutLabel.text = UserDefaults.standard.string(forKey: "userName")
+        
     }
+
     
     @IBAction func logOutButtonPressed(_ sender: Any){
         
@@ -32,7 +38,7 @@ class UserProfileViewController: UIViewController {
         UserDefaults.standard.set(false, forKey: "isUserLoggedIn");
         UserDefaults.standard.synchronize();
         
-        self.performSegue(withIdentifier: "loginView", sender: self)
+         self.navigationController?.popViewController(animated: true)
     }
     
 

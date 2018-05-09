@@ -13,16 +13,25 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     
-    @IBOutlet weak var TestImageOutput: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.setHidesBackButton(true, animated:true);
-        
-        let data = UserDefaults.standard.object(forKey: "userProfileImage") as! NSData
-        TestImageOutput.image = UIImage(data: data as Data)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        // Check if user is logged in or not, if not logged in stay on this page, otherwise go to the user page
+        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn");
+        
+        if(!isUserLoggedIn)
+        {
+            // Stay on this page
+        }
+        else
+        {
+            self.performSegue(withIdentifier: "goToUserPage", sender: self)
+        }
     }
     
     // Login button pressed
@@ -43,7 +52,7 @@ class LogInViewController: UIViewController {
                 UserDefaults.standard.set(true, forKey: "isUserLoggedIn");
                 UserDefaults.standard.synchronize();
                 
-                 self.navigationController?.popViewController(animated: true)
+                 self.performSegue(withIdentifier: "goToUserPage", sender: self)
             }
             // Wrong Password Alert
             else
