@@ -15,7 +15,7 @@
 * Rakendus töötab kõigil iPhone mudelitel vertikaalses asendis
  ---
  # Buggide list: 
- * Kasutaja parool ei ole _hashitud_ - paroolid peaks salvestama _keychaini _
+ * Kasutaja parool ei ole _hashitud_ - paroolid peaks salvestama _keychain-i_
  * Asudes kasutaja profiili lehel (sisse logituna) ja vajutades tab bari peal olevat _kasutaja_ nuppu, näeb korraks sisselogimis lehte
  * Asudes Ajaloo lehel (sisse logituna) ja vajutades tab bari peal olevat Ajaloo nuppu, näeb korraks sisselogimis nõude lehte
  * Ajaloo tabel ei uuene automaatselt - olles ajaloo lehel, tee topeltklik tab baril asuval Ajaloo nupul 
