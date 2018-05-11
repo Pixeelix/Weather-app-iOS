@@ -21,4 +21,4 @@
  * Ajaloo tabel ei uuene automaatselt - olles ajaloo lehel, tee topeltklik tab baril asuval Ajaloo nupul 
  * Asukoha ja temperatuuri salvestamine userdefaulti array-sse pole kõige parem lahendus
 
-# Kokku kulunud aeg: ~45
+# Kokku kulunud aeg: ~45 h
