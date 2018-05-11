@@ -2,7 +2,6 @@
 //  LogInViewController.swift
 //  WeatherMP
 //
-//  Created by Greete Jõgi on 08/05/2018.
 //  Copyright © 2018 Martin Pihooja. All rights reserved.
 //
 
@@ -16,7 +15,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+       
     }
     
     override func viewDidAppear(_ animated: Bool)

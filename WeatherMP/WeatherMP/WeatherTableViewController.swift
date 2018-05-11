@@ -21,11 +21,10 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         setupNotifications() // Set up Local notifications
         
         searchBar.delegate = self
-        
         startReceivingLocationChanges()
         
     }
-    
+    // Get User current location
     func startReceivingLocationChanges() {
         // Check if user has allowed authorized access to location or not
         let authorizationStatus = CLLocationManager.authorizationStatus()
@@ -45,6 +44,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         locationManager.startUpdatingLocation()
     }
     
+    // Convert location and get that location weather
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Use the last reported location.
         if let lastLocation = self.locationManager.location {
@@ -56,11 +56,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
                 {
                     let firstLocation = placemarks?[0]
                     // Get the current location name
-                    let currentLocationName = firstLocation?.locality
+                    let currentLocationName = (firstLocation?.locality)!
                     // Place the current location name to the searchbar
                     self.searchBar.placeholder = currentLocationName
                     // Get current location weather data
-                    self.UpdateWeatherForLocation(location: currentLocationName!)
+                    self.UpdateWeatherForLocation(location: currentLocationName)
+                    
+                    
                 }
                 else
                 {
@@ -137,8 +139,42 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
                         if let weatherData = results {
                             self.forecastData = weatherData
                             
+                            //Convert location to normal name
+                            let geocoder = CLGeocoder()
+                            // Lookup the location and pass it to the completion handler
+                            geocoder.reverseGeocodeLocation(location, completionHandler:{(placemarks, error) in
+                                if error == nil
+                                {
+                                    let firstLocation = placemarks?[0]
+                                    // Get the current location name
+                                    let currentLocationName = (firstLocation?.locality)!
+                                    
+                                    //------------Save Location Data to the UsersDefault--------------//
+                                    let defaults = UserDefaults.standard
+                                    // Get the location history array
+                                    var locationArray = defaults.stringArray(forKey: "LocationArray") ?? [String]()
+                                    // Add current location to the end of the array
+                                    locationArray.append(currentLocationName)
+                                    // Save new array to the userdefaults
+                                    defaults.set(locationArray, forKey: "LocationArray")
+                                    
+                                    //------------Save Temperature Data to the UsersDefault--------------//
+                                    let tempDouble = self.forecastData[0].temperature
+                                    let tempString = String(format:"%.2f", tempDouble)
+                                    var tempArray = defaults.stringArray(forKey: "TempArray") ?? [String]()
+                                    // Add current temp to the end of the array
+                                    tempArray.append(tempString)
+                                    // Save new array to the userdefaults
+                                    defaults.set(tempArray, forKey: "TempArray")
+                                }
+                                else
+                                {
+                                    // An error occurred during geocoding.
+                                    print("Something went wrong")
+                                }
+                            })
                             DispatchQueue.main.async {
-                                self.tableView.reloadData()
+                            self.tableView.reloadData()
                             }
                         }
                     })
@@ -160,7 +196,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         return 1
     }
     
-    // Add date to table view Section header
+    // Add date to table view Section "header"
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
         let dateFormatter = DateFormatter()
@@ -173,13 +209,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
     // Add weather information to the table view Cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
+        
         let weatherObject = forecastData[indexPath.section]
         
         cell.textLabel?.text = weatherObject.summary // Show weather summary text
         cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °C" // Show temperature
         cell.imageView?.image = UIImage (named: weatherObject.icon) // Show icon based on weather data
-
+        
         return cell
     }
 }

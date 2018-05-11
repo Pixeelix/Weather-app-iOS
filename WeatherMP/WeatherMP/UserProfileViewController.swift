@@ -2,7 +2,6 @@
 //  UserProfileViewController.swift
 //  WeatherMP
 //
-//  Created by Greete Jõgi on 09/05/2018.
 //  Copyright © 2018 Martin Pihooja. All rights reserved.
 //
 

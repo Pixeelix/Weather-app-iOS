@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct Credentials {
+    var username: String
+    var password: String
+}
+
 class RegisterAccountViewController: UIViewController {
 
     @IBOutlet weak var userNameTextField: UITextField!
