@@ -22,7 +22,19 @@ class HistoryPageTableViewController: UITableViewController {
     // Update the table every time view will appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        
+        // Check if user is logged in or not, if not logged in, go to the LogInToSeeHistory page, otherwise stay on this page
+        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn");
+        
+        if(!isUserLoggedIn)
+        {
+            self.navigationController?.popViewController(animated: true)
+        }
+        else
+        {
+            //Stay on this page
+        }
+        
         // Get user location history
         locationHistoryArray = UserDefaults.standard.stringArray(forKey: "LocationArray") ?? [String]()
         // Get user temp history
