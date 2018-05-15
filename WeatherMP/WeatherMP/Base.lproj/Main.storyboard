@@ -205,6 +205,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="changeProfileImageButton" destination="YgZ-Oc-plg" id="G3u-r4-Bag"/>
+                        <outlet property="createAccountBtn" destination="HXI-aM-lxl" id="zYq-Qy-Uo2"/>
                         <outlet property="repeatPasswordTextField" destination="eTn-77-VYl" id="hVf-Z6-yLI"/>
                         <outlet property="userNameTextField" destination="d2S-pZ-rSr" id="3Ie-jf-Vik"/>
                         <outlet property="userPasswordTextField" destination="aab-aL-RQC" id="FIl-7H-Cch"/>

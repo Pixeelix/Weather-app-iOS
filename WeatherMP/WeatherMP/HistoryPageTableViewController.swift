@@ -18,10 +18,17 @@ class HistoryPageTableViewController: UITableViewController {
         // Hide back button
          self.navigationItem.setHidesBackButton(true, animated:true);
         
+    }
+    // Update the table every time view will appear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
         // Get user location history
         locationHistoryArray = UserDefaults.standard.stringArray(forKey: "LocationArray") ?? [String]()
         // Get user temp history
         tempHistoryArray = UserDefaults.standard.stringArray(forKey: "TempArray") ?? [String]()
+        
+        tableView.reloadData()
     }
     
     
