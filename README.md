@@ -20,7 +20,7 @@
  * - [ ] Asudes kasutaja profiili lehel (sisse logituna) ja vajutades tab bari peal olevat _kasutaja_ nuppu, näeb korraks sisselogimis lehte
  * - [ ] Asudes Ajaloo lehel (sisse logituna) ja vajutades tab bari peal olevat Ajaloo nuppu, näeb korraks sisselogimis nõude lehte
  * - [x] ~~Ajaloo tabel ei uuene automaatselt - olles ajaloo lehel, tee topeltklik tab baril asuval Ajaloo nupul~~
- * - [ ] Kui kasutaja logib enda kontost välja, jääb ajaloo leht nähtavaks seni, kuni ta pole seda "refreshinud" (esineb juhul, kui kasutaja on   avanud ajaloo lehe)
+ * - [x] ~~Kui kasutaja logib enda kontost välja, jääb ajaloo leht nähtavaks seni, kuni ta pole seda "refreshinud" (esineb juhul, kui kasutaja on   avanud ajaloo lehe)~~
  * - [ ] Asukoha ja temperatuuri salvestamine userdefaulti array-sse pole kõige parem lahendus
 
 # Kokku kulunud aeg: ~45 h
