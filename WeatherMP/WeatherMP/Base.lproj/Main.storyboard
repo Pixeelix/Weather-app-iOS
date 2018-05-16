@@ -62,7 +62,7 @@
                                     <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="af0-G7-rsT" kind="show" identifier="looUusKasutaja" id="l8a-cW-YCr"/>
+                                    <segue destination="af0-G7-rsT" kind="show" id="ADq-uq-Wjm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -158,15 +158,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXI-aM-lxl">
-                                <rect key="frame" x="80" y="474" width="160" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwf-fQ-SxR">
+                                <rect key="frame" x="106" y="463" width="109" height="35"/>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Loo kasutaja">
-                                    <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Loo Kasutaja">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerButtonTapped:" destination="af0-G7-rsT" eventType="touchUpInside" id="u1c-QS-cVh"/>
+                                    <action selector="createNewUserBtnTapped:" destination="af0-G7-rsT" eventType="touchUpInside" id="kiN-qB-ZLC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -174,9 +174,10 @@
                         <constraints>
                             <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="se3-Iy-PZN" secondAttribute="trailing" constant="16" id="1eO-e0-0PA"/>
                             <constraint firstItem="ilB-Dj-zAz" firstAttribute="top" secondItem="XUe-Pl-LgK" secondAttribute="top" constant="20" id="1qi-OB-VzQ"/>
+                            <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="jwf-fQ-SxR" secondAttribute="trailing" constant="105" id="9g3-6r-Bwg"/>
                             <constraint firstItem="YgZ-Oc-plg" firstAttribute="centerX" secondItem="u6F-1u-Sj1" secondAttribute="centerX" id="9uT-Sz-vXJ"/>
                             <constraint firstItem="d2S-pZ-rSr" firstAttribute="top" secondItem="diq-9M-qGk" secondAttribute="bottom" constant="8" id="EX7-dH-Vfh"/>
-                            <constraint firstItem="HXI-aM-lxl" firstAttribute="leading" secondItem="XUe-Pl-LgK" secondAttribute="leading" constant="80" id="HH8-11-GiM"/>
+                            <constraint firstItem="jwf-fQ-SxR" firstAttribute="top" secondItem="eTn-77-VYl" secondAttribute="bottom" constant="19" id="JAG-NZ-v8x"/>
                             <constraint firstItem="se3-Iy-PZN" firstAttribute="top" secondItem="aab-aL-RQC" secondAttribute="bottom" constant="8" id="JXh-cF-I9x"/>
                             <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="Z5J-M8-kC6" secondAttribute="trailing" constant="16" id="Lok-BY-ClB"/>
                             <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="aab-aL-RQC" secondAttribute="trailing" constant="16" id="MCu-rp-4sv"/>
@@ -188,13 +189,12 @@
                             <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="eTn-77-VYl" secondAttribute="trailing" constant="16" id="atQ-e2-gqu"/>
                             <constraint firstItem="ilB-Dj-zAz" firstAttribute="centerX" secondItem="u6F-1u-Sj1" secondAttribute="centerX" id="bUE-UR-qsN"/>
                             <constraint firstItem="aab-aL-RQC" firstAttribute="top" secondItem="Z5J-M8-kC6" secondAttribute="bottom" constant="8" id="bkD-00-9Bf"/>
-                            <constraint firstItem="HXI-aM-lxl" firstAttribute="top" secondItem="eTn-77-VYl" secondAttribute="bottom" constant="30" id="bl9-a8-vak"/>
                             <constraint firstItem="Z5J-M8-kC6" firstAttribute="top" secondItem="d2S-pZ-rSr" secondAttribute="bottom" constant="8" id="hmm-8D-V2G"/>
                             <constraint firstItem="aab-aL-RQC" firstAttribute="leading" secondItem="XUe-Pl-LgK" secondAttribute="leading" constant="16" id="o4M-Wg-px9"/>
                             <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="d2S-pZ-rSr" secondAttribute="trailing" constant="16" id="oZw-jf-bTM"/>
                             <constraint firstItem="YgZ-Oc-plg" firstAttribute="top" secondItem="ilB-Dj-zAz" secondAttribute="bottom" constant="2" id="vfO-mw-DCn"/>
-                            <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="HXI-aM-lxl" secondAttribute="trailing" constant="80" id="xGN-W9-8eH"/>
                             <constraint firstItem="XUe-Pl-LgK" firstAttribute="trailing" secondItem="diq-9M-qGk" secondAttribute="trailing" constant="16" id="xYj-W1-Y1i"/>
+                            <constraint firstItem="jwf-fQ-SxR" firstAttribute="leading" secondItem="XUe-Pl-LgK" secondAttribute="leading" constant="106" id="yAU-b8-Huz"/>
                             <constraint firstItem="diq-9M-qGk" firstAttribute="leading" secondItem="XUe-Pl-LgK" secondAttribute="leading" constant="16" id="yE6-He-1eu"/>
                             <constraint firstItem="se3-Iy-PZN" firstAttribute="leading" secondItem="XUe-Pl-LgK" secondAttribute="leading" constant="16" id="yWn-Rz-s9Y"/>
                         </constraints>
@@ -205,7 +205,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="changeProfileImageButton" destination="YgZ-Oc-plg" id="G3u-r4-Bag"/>
-                        <outlet property="createAccountBtn" destination="HXI-aM-lxl" id="zYq-Qy-Uo2"/>
                         <outlet property="repeatPasswordTextField" destination="eTn-77-VYl" id="hVf-Z6-yLI"/>
                         <outlet property="userNameTextField" destination="d2S-pZ-rSr" id="3Ie-jf-Vik"/>
                         <outlet property="userPasswordTextField" destination="aab-aL-RQC" id="FIl-7H-Cch"/>

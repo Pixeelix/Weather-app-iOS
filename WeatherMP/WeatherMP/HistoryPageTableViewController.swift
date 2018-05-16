@@ -73,6 +73,5 @@ class HistoryPageTableViewController: UITableViewController {
         
         return cell
     }
-    
 
 }
